@@ -26,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->register(FortifyServiceProvider::class);
+
+
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
 
