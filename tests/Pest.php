@@ -11,10 +11,9 @@
 |
 */
 
-use Tests\CreatesApplication;
-use Illuminate\Foundation\Testing\TestCase;
-
-uses(TestCase::class, CreatesApplication::class)->in('Feature');
+//uses(\Tests\FeatureTestCase::class)->in(
+//    '../src/User/Tests/Feature',
+//);
 
 /*
 |--------------------------------------------------------------------------
