@@ -4,8 +4,8 @@ namespace Freelance\User\Application\Http\Controllers;
 
 final class UserController
 {
-    public function index()
+    public function show() //todo: update.
     {
-        return 'running';
+        return request()?->user();
     }
 }

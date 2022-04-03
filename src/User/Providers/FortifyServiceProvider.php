@@ -2,7 +2,6 @@
 
 namespace Freelance\User\Providers;
 
-use Freelance\User\Domain\Actions\Fortify\CreateNewUser;
 use Freelance\User\Domain\Actions\Fortify\ResetUserPassword;
 use Freelance\User\Domain\Actions\Fortify\UpdateUserPassword;
 use Freelance\User\Domain\Actions\Fortify\UpdateUserProfileInformation;
@@ -31,7 +30,6 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);

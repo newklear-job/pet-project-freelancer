@@ -26,8 +26,22 @@
 |
 */
 
+use Illuminate\Validation\ValidationException;
+
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
+});
+
+expect()->extend('toBeInvalid', function ($errors) {
+    try {
+        $this->value->__invoke();
+        test()->fail('No validation exception was thrown!');
+    }
+    catch (ValidationException $exception) {
+        foreach ($errors as $key => $error) {
+            expect(json_encode($exception->errors()[$key], JSON_THROW_ON_ERROR))->toContain($error);
+        }
+    }
 });
 
 /*
