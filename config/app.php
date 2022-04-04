@@ -179,7 +179,8 @@ return [
 
 
         //Modules
-        \Freelance\User\Providers\AppServiceProvider::class
+        \Freelance\User\Providers\AppServiceProvider::class,
+        \Freelance\Task\Providers\AppServiceProvider::class,
     ],
 
     /*
