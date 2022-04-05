@@ -23,13 +23,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::pattern('id', '[0-9]+');
+        
         $this->routes(function () {
             if (file_exists(__DIR__ . '/../api.php')) {
                 Route::prefix('api')
                      ->middleware('api')
                      ->group(__DIR__ . '/../api.php');
             }
-            
+
             if (file_exists(__DIR__ . '/../web.php')) {
                 Route::middleware('web')
                      ->group(__DIR__ . '/../web.php');
