@@ -2,6 +2,7 @@
 
 namespace Freelance\Task\Providers;
 
+use Freelance\Task\Domain\ValueObjects\Id;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Route::pattern('id', '[0-9]+');
+        Route::pattern('category', '[0-9]+');
+        Route::bind('category', function ($value) {
+            return Id::create($value);
+        });
 
         $this->routes(function () {
             if (file_exists(__DIR__ . '/../api.php')) {

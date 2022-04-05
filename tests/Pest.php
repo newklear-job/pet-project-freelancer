@@ -26,7 +26,9 @@
 |
 */
 
+use Freelance\User\Domain\Models\User;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\Sanctum;
 
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
@@ -55,7 +57,11 @@ expect()->extend('toBeInvalid', function ($errors) {
 |
 */
 
-function something()
+function login(User $user = null, array $abilities = ['*'])
 {
-    // ..
+    $user = $user ?: User::factory()->email('test@test.test')->create();
+    Sanctum::actingAs(
+        $user,
+        $abilities
+    );
 }

@@ -2,12 +2,29 @@
 
 namespace Freelance\Task\Providers;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Freelance\Task\Domain\Actions\Contracts\CreatesCategoryAction;
+use Freelance\Task\Domain\Actions\Contracts\DeletesCategoryAction;
+use Freelance\Task\Domain\Actions\Contracts\GetsPaginatedCategoriesAction;
+use Freelance\Task\Domain\Actions\Contracts\ShowsCategoryAction;
+use Freelance\Task\Domain\Actions\Contracts\UpdatesCategoryAction;
+use Freelance\Task\Domain\Actions\CreateCategoryAction;
+use Freelance\Task\Domain\Actions\DeleteCategoryAction;
+use Freelance\Task\Domain\Actions\GetPaginatedCategoriesAction;
+use Freelance\Task\Domain\Actions\ShowCategoryAction;
+use Freelance\Task\Domain\Actions\UpdateCategoryAction;
+use Freelance\Task\Infrastructure\Repositories\CategoryRepository;
+use Freelance\Task\Infrastructure\Repositories\EloquentCategoryRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     public array $bindings = [
+        CategoryRepository::class            => EloquentCategoryRepository::class,
+        GetsPaginatedCategoriesAction::class => GetPaginatedCategoriesAction::class,
+        CreatesCategoryAction::class         => CreateCategoryAction::class,
+        ShowsCategoryAction::class           => ShowCategoryAction::class,
+        UpdatesCategoryAction::class         => UpdateCategoryAction::class,
+        DeletesCategoryAction::class          => DeleteCategoryAction::class,
     ];
 
     /**
