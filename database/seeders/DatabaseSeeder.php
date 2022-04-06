@@ -13,6 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AdminSeeder::class);
+        $directories = scandir(__DIR__ . '/../../src');
+        $moduleNames = array_filter($directories, fn($dir) => !in_array($dir, ['.', '..']));
+        foreach ($moduleNames as $module) {
+            $classNamespace = "Freelance\\$module\Infrastructure\Database\Seeders\DatabaseSeeder";
+            if (class_exists($classNamespace)) {
+                $this->call($classNamespace);
+            } else {
+                $this->command->warn("Warning! Class does not exist: $classNamespace.");
+            }
+        }
     }
 }
