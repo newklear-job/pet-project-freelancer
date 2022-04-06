@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Auth\User;
+
+use Freelance\User\Domain\Models\User;
 
 return [
 
