@@ -1,0 +1,65 @@
+version: '3.8'
+services:
+  back:
+    build:
+      args:
+        user: ${UNAME:-walemy}
+        uid: ${UID:-1000}
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+      context: .
+      dockerfile: php.dockerfile
+    container_name: ${PROJECT_NAME}-back
+    restart: unless-stopped
+    working_dir: /var/www/project
+    volumes:
+      - ./docker/back/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./docker/back/.bashrc:/home/${UNAME}/.bashrc
+      - ./:/var/www/project
+    networks:
+      - network
+
+  nginx:
+    image: nginx:alpine
+    container_name: ${PROJECT_NAME}-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./:/var/www/project
+    networks:
+      - network
+
+  postgres:
+    image: postgres:latest
+    container_name: ${PROJECT_NAME}-postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    networks:
+      - network
+
+  postgres-testing:
+    image: postgres:latest
+    container_name: ${PROJECT_NAME}-postgres-testing
+    volumes:
+      - db-data-testing:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  db-data:
+  db-data-testing:
