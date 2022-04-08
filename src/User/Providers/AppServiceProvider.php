@@ -2,6 +2,7 @@
 
 namespace Freelance\User\Providers;
 
+use Freelance\User\Contracts\AuthorizationService as AuthorizationServiceContract;
 use Freelance\User\Domain\Actions\Contracts\LoginsUserAction;
 use Freelance\User\Domain\Actions\Contracts\LogoutsUserAction;
 use Freelance\User\Domain\Actions\Contracts\RegistersUserAction;
@@ -10,16 +11,17 @@ use Freelance\User\Domain\Actions\LogoutUserAction;
 use Freelance\User\Domain\Actions\RegisterUserAction;
 use Freelance\User\Infrastructure\Repositories\EloquentUserRepository;
 use Freelance\User\Infrastructure\Repositories\UserRepository;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Freelance\User\Infrastructure\Services\AuthorizationService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     public array $bindings = [
-        UserRepository::class      => EloquentUserRepository::class,
-        LoginsUserAction::class    => LoginUserAction::class,
-        LogoutsUserAction::class   => LogoutUserAction::class,
-        RegistersUserAction::class => RegisterUserAction::class,
+        UserRepository::class               => EloquentUserRepository::class,
+        LoginsUserAction::class             => LoginUserAction::class,
+        LogoutsUserAction::class            => LogoutUserAction::class,
+        RegistersUserAction::class          => RegisterUserAction::class,
+        AuthorizationServiceContract::class => AuthorizationService::class,
     ];
 
     /**

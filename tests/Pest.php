@@ -65,3 +65,15 @@ function login(User $user = null, array $abilities = ['*'])
         $abilities
     );
 }
+
+function loginAsAdmin(User $user = null, array $abilities = ['*'])
+{
+    $user = $user ?: User::factory()->email('test@test.test')->create();
+
+    $user->assignRole(\Freelance\User\Domain\Enums\RoleEnum::SUPER_ADMIN->value);
+
+    Sanctum::actingAs(
+        $user,
+        $abilities
+    );
+}

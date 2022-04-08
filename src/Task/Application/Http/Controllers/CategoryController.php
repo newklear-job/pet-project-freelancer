@@ -10,6 +10,8 @@ use Freelance\Task\Domain\Actions\Contracts\GetsPaginatedCategoriesAction;
 use Freelance\Task\Domain\Actions\Contracts\ShowsCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\UpdatesCategoryAction;
 use Freelance\Task\Domain\Dtos\CategoryDto;
+use Freelance\Task\Domain\Models\Category;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -17,9 +19,12 @@ use Illuminate\Http\Response;
 
 final class CategoryController
 {
+    use AuthorizesRequests;
+
     public function index(
         GetsPaginatedCategoriesAction $action,
     ): ResourceCollection {
+        $this->authorize('index', Category::class);
         $paginated = $action->run();
         return CategoryResource::collection($paginated);
     }
@@ -28,6 +33,7 @@ final class CategoryController
         Request               $request,
         CreatesCategoryAction $action
     ): JsonResource {
+        $this->authorize('create', Category::class);
         $dto = CategoryDto::create(
             $request->input('name'),
             $request->input('parent_id')
@@ -40,6 +46,7 @@ final class CategoryController
         Id $id,
         ShowsCategoryAction $action,
     ): JsonResource {
+        $this->authorize('show', [Category::class, $id]);
         $entity = $action->run($id);
         return new CategoryResource($entity);
     }
@@ -49,6 +56,7 @@ final class CategoryController
         Request $request,
         UpdatesCategoryAction $action,
     ): JsonResource {
+        $this->authorize('update', [Category::class, $id]);
         $dto = CategoryDto::create(
             $request->input('name'),
             $request->input('parent_id')
@@ -60,6 +68,7 @@ final class CategoryController
 
     public function destroy(Id $id, DeletesCategoryAction $action): Response
     {
+        $this->authorize('delete', [Category::class, $id]);
         $action->run($id);
         return response()->noContent();
     }

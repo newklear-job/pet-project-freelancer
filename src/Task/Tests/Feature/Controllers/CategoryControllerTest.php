@@ -10,9 +10,10 @@ use Freelance\Task\Domain\Models\Category;
 uses(\Tests\FeatureTestCase::class);
 
 it('category index returns data and calls action', function () {
+    $this->seed();
     $category = Category::factory()->create();
-    login();
-    $this->getJson(route('categories.index'))
+    loginAsAdmin();
+    $this->getJson(route('admin.categories.index'))
          ->assertSuccessful()
          ->assertJsonStructure([
                                    'data' => [
@@ -27,8 +28,9 @@ it('category index returns data and calls action', function () {
 })->shouldHaveCalledAction(GetsPaginatedCategoriesAction::class);
 
 it('category store returns data and calls proper action', function () {
-    login();
-    $this->postJson(route('categories.store'), [
+    $this->seed();
+    loginAsAdmin();
+    $this->postJson(route('admin.categories.store'), [
         'name'      => 'test name',
         'parent_id' => null,
     ])
@@ -43,9 +45,10 @@ it('category store returns data and calls proper action', function () {
 })->shouldHaveCalledAction(CreatesCategoryAction::class);
 
 it('category show returns data and calls proper action', function () {
-    login();
+    $this->seed();
+    loginAsAdmin();
     $category = Category::factory()->create();
-    $this->getJson(route('categories.show', $category->id))
+    $this->getJson(route('admin.categories.show', $category->id))
          ->assertSuccessful()
          ->assertJsonStructure([
                                    'data' => [
@@ -57,10 +60,11 @@ it('category show returns data and calls proper action', function () {
 })->shouldHaveCalledAction(ShowsCategoryAction::class);
 
 it('category update returns data and calls proper action', function () {
-    login();
+    $this->seed();
+    loginAsAdmin();
     $category = Category::factory()->create();
     $parent = Category::factory()->create();
-    $this->patchJson(route('categories.update', $category->id), [
+    $this->patchJson(route('admin.categories.update', $category->id), [
         'name'      => 'test name',
         'parent_id' => $parent->id
     ])
@@ -75,8 +79,23 @@ it('category update returns data and calls proper action', function () {
 })->shouldHaveCalledAction(UpdatesCategoryAction::class);
 
 it('category destroy calls proper action', function () {
-    login();
+    $this->seed();
+    loginAsAdmin();
     $category = Category::factory()->create();
-    $this->deleteJson(route('categories.destroy', $category->id))
+    $this->deleteJson(route('admin.categories.destroy', $category->id))
          ->assertSuccessful();
 })->shouldHaveCalledAction(DeletesCategoryAction::class);
+
+it('category endpoints are closed to regular users', function () {
+    login();
+    $this->getJson(route('admin.categories.index'))
+         ->assertForbidden();
+    $this->postJson(route('admin.categories.store'))
+         ->assertForbidden();
+    $this->getJson(route('admin.categories.show', 1))
+         ->assertForbidden();
+    $this->patchJson(route('admin.categories.update', 1))
+         ->assertForbidden();
+    $this->deleteJson(route('admin.categories.destroy', 1))
+         ->assertForbidden();
+});
