@@ -2,7 +2,7 @@
 
 namespace Freelance\Task\Providers;
 
-use Freelance\Task\Domain\ValueObjects\Id;
+use App\ValueObjects\Id;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 

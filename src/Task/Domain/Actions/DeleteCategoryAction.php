@@ -2,8 +2,8 @@
 
 namespace Freelance\Task\Domain\Actions;
 
+use App\ValueObjects\Id;
 use Freelance\Task\Domain\Actions\Contracts\DeletesCategoryAction;
-use Freelance\Task\Domain\ValueObjects\Id;
 use Freelance\Task\Infrastructure\Repositories\CategoryRepository;
 
 final class DeleteCategoryAction implements DeletesCategoryAction

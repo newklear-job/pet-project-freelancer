@@ -2,9 +2,9 @@
 
 namespace Freelance\Task\Domain\Actions;
 
+use App\ValueObjects\Id;
 use Freelance\Task\Domain\Actions\Contracts\ShowsCategoryAction;
 use Freelance\Task\Domain\Models\Category;
-use Freelance\Task\Domain\ValueObjects\Id;
 use Freelance\Task\Infrastructure\Repositories\CategoryRepository;
 
 final class ShowCategoryAction implements ShowsCategoryAction

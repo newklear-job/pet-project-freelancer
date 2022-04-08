@@ -1,8 +1,8 @@
 <?php
 
+use App\ValueObjects\Id;
 use Freelance\Task\Domain\Actions\Contracts\DeletesCategoryAction;
 use Freelance\Task\Domain\Models\Category;
-use Freelance\Task\Domain\ValueObjects\Id;
 
 uses(\Tests\FeatureTestCase::class);
 
