@@ -1,0 +1,30 @@
+parameters:
+  paths:
+    - ./src/User
+  layers:
+    - name: UserModule
+      collectors:
+        - type: bool
+          must:
+            - type: className
+              regex: Freelance\\User\\.*
+          must_not:
+            - type: className
+              regex: Freelance\\User\\Contracts\\.*
+    - name: App
+      collectors:
+        - type: className
+          regex: App\\.*
+    - name: Contract
+      collectors:
+        - type: className
+          regex: Freelance\\[^\\]*\\Contracts\\.*
+    - name: Laravel
+      collectors:
+        - type: className
+          regex: (Laravel|Illuminate)\\.*
+  ruleset:
+    UserModule:
+      - App
+      - Contract
+      - Laravel

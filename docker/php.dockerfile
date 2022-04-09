@@ -67,6 +67,13 @@ RUN apt-get install -y \
 
 RUN npm install -g svgo
 
+# Setup deptrac
+
+RUN curl -LS https://github.com/qossmic/deptrac/releases/download/0.19.3/deptrac.phar -o deptrac.phar \
+    && chmod +x deptrac.phar \
+    && mv deptrac.phar /usr/local/bin/deptrac \
+    && apt-get install -y graphviz
+
 # Set working directory
 WORKDIR /var/www/project
 

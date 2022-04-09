@@ -7,7 +7,7 @@ services:
         uid: ${UID:-1000}
         GITHUB_TOKEN: ${GITHUB_TOKEN}
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: docker/php.dockerfile
     container_name: ${PROJECT_NAME}-back
     restart: unless-stopped
     working_dir: /var/www/project

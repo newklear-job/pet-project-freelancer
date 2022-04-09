@@ -1,0 +1,25 @@
+parameters:
+  paths:
+    - ./app
+    - ./src
+  layers:
+    - name: App
+      collectors:
+        - type: className
+          regex: App\\.*
+    - name: Contract
+      collectors:
+        - type: className
+          regex: Freelance\\[^\\]*\\Contracts\\.*
+    - name: Laravel
+      collectors:
+        - type: className
+          regex: (Laravel|Illuminate)\\.*
+  ruleset:
+    App:
+      - Laravel
+    Contract:
+      - Laravel
+imports:
+  - src/Task/deptrac.yaml
+  - src/User/deptrac.yaml
