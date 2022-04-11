@@ -29,4 +29,9 @@ final class Id
     {
         return $this->id === $other->id;
     }
+
+    public function __toString(): string
+    {
+        return $this->value();
+    }
 }
