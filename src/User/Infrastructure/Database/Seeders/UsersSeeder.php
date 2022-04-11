@@ -11,15 +11,6 @@ final class UsersSeeder extends Seeder
 {
     public function run()
     {
-        $admin = User::firstOrCreate(
-            ['email' => 'admin@mail.mail'],
-            [
-                'name'     => 'Admin',
-                'password' => Hash::make('12345678'),
-            ]
-        );
-        $admin->assignRole(RoleEnum::SUPER_ADMIN->value);
-
         $client = User::firstOrCreate(
             ['email' => 'client@mail.mail'],
             [
