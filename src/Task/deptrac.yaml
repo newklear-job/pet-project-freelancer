@@ -11,18 +11,6 @@ parameters:
           must_not:
             - type: className
               regex: Freelance\\Task\\Contracts\\.*
-    - name: App
-      collectors:
-        - type: className
-          regex: App\\.*
-    - name: Contract
-      collectors:
-        - type: className
-          regex: Freelance\\[^\\]*\\Contracts\\.*
-    - name: Laravel
-      collectors:
-        - type: className
-          regex: (Laravel|Illuminate)\\.*
   ruleset:
     TaskModule:
       - App

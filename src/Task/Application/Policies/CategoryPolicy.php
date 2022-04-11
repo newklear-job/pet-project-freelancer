@@ -4,8 +4,8 @@ namespace Freelance\Task\Application\Policies;
 
 use App\ValueObjects\Id;
 use Freelance\User\Contracts\AuthorizationService;
-use Freelance\User\Domain\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Foundation\Auth\User;
 
 class CategoryPolicy
 {
