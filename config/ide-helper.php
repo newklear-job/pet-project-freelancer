@@ -139,7 +139,7 @@ return [
     */
 
     'model_locations' => [
-        'src/*/Models',
+        'src/*/Domain/Models',
     ],
 
     /*
