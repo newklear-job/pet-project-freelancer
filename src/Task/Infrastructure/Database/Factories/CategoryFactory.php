@@ -24,7 +24,7 @@ class CategoryFactory extends Factory
     public function name(string $name)
     {
         return $this->state(fn(array $attributes) => [
-            'name' => bcrypt($name),
+            'name' => $name,
         ]
         );
     }
