@@ -2,6 +2,7 @@
 
 namespace Freelance\Task\Domain\Actions;
 
+use Filterable\Dtos\FilterDto;
 use Freelance\Task\Domain\Actions\Contracts\GetsPaginatedCategoriesAction;
 use Freelance\Task\Infrastructure\Repositories\CategoryRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -13,8 +14,8 @@ final class GetPaginatedCategoriesAction implements GetsPaginatedCategoriesActio
     ) {
     }
 
-    public function run(): LengthAwarePaginator
+    public function run(FilterDto $filterDto): LengthAwarePaginator
     {
-        return $this->repository->getPaginatedForAdminPanel();
+        return $this->repository->getPaginatedForAdminPanel($filterDto);
     }
 }

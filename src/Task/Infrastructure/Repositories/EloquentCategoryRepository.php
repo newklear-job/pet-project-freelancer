@@ -3,23 +3,36 @@
 namespace Freelance\Task\Infrastructure\Repositories;
 
 use App\ValueObjects\Id;
+use Filterable\Dtos\FilterDto;
 use Freelance\Task\Domain\Dtos\CategoryDto;
 use Freelance\Task\Domain\Models\Category;
+use Freelance\Task\Infrastructure\Filters\CategoryFilter;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\ValidationException;
 
 final class EloquentCategoryRepository implements CategoryRepository
 {
-    public function getPaginatedForAdminPanel(): LengthAwarePaginator
+    public function getPaginatedForAdminPanel(FilterDto $filterDto): LengthAwarePaginator
     {
         return Category::query()
-                       ->paginate();
+                       ->filter((new CategoryFilter())->setFilters($filterDto->getFilters()))
+                       ->when(
+                           $filterDto->getSort(),
+                           fn($query) => $query->orderBy(
+                               $filterDto->getSort()->getName(),
+                               $filterDto->getSort()->getDirection()
+                           )
+                       )
+                       ->paginate(
+                           perPage: $filterDto->getPagination()->getPerPage(),
+                           page   : $filterDto->getPagination()->getPage()
+                       );
     }
 
     public function create(CategoryDto $dto): Category
     {
         return Category::create([
-                                    'name'      => $dto->getName(),
+                                    'name' => $dto->getName(),
                                     'parent_id' => $dto->getParentId()?->value()
                                 ]);
     }

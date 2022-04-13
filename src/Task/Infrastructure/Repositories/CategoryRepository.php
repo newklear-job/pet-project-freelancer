@@ -3,13 +3,14 @@
 namespace Freelance\Task\Infrastructure\Repositories;
 
 use App\ValueObjects\Id;
+use Filterable\Dtos\FilterDto;
 use Freelance\Task\Domain\Dtos\CategoryDto;
 use Freelance\Task\Domain\Models\Category;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface CategoryRepository
 {
-    public function getPaginatedForAdminPanel(): LengthAwarePaginator;
+    public function getPaginatedForAdminPanel(FilterDto $filterDto): LengthAwarePaginator;
 
     public function create(CategoryDto $dto): Category;
 

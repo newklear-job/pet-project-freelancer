@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "newklear-job/filterable": "dev-master",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/fortify": "^1.11",
         "laravel/framework": "^9.2",
@@ -27,6 +28,12 @@
         "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^1.0"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url" : "https://github.com/newklear-job/laravel-filterable.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",

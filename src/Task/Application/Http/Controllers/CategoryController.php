@@ -3,6 +3,7 @@
 namespace Freelance\Task\Application\Http\Controllers;
 
 use App\ValueObjects\Id;
+use Filterable\Dtos\FilterDto;
 use Freelance\Task\Application\Http\Resources\CategoryResource;
 use Freelance\Task\Domain\Actions\Contracts\CreatesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\DeletesCategoryAction;
@@ -22,10 +23,12 @@ final class CategoryController
     use AuthorizesRequests;
 
     public function index(
+        Request $request,
         GetsPaginatedCategoriesAction $action,
     ): ResourceCollection {
         $this->authorize('index', Category::class);
-        $paginated = $action->run();
+        $filterDto = FilterDto::createFromArrayBag($request->all());
+        $paginated = $action->run($filterDto);
         return CategoryResource::collection($paginated);
     }
 
