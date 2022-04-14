@@ -10,7 +10,7 @@ final class EmailCast implements CastsAttributes
 
     public function get($model, $key, $value, $attributes)
     {
-        return Email::create($attributes['email']);
+        return Email::create($attributes[$key]);
     }
 
     public function set($model, $key, $value, $attributes)
@@ -20,7 +20,7 @@ final class EmailCast implements CastsAttributes
         }
 
         return [
-            'email' => $value->value(),
+            $key => $value->value(),
         ];
     }
 }
