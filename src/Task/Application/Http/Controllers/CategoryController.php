@@ -2,7 +2,7 @@
 
 namespace Freelance\Task\Application\Http\Controllers;
 
-use App\ValueObjects\Id;
+use Freelance\Task\Domain\ValueObjects\Id;
 use Filterable\Dtos\FilterDto;
 use Freelance\Task\Application\Http\Resources\CategoryResource;
 use Freelance\Task\Domain\Actions\Contracts\CreatesCategoryAction;

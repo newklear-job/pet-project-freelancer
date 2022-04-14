@@ -2,7 +2,7 @@
 
 namespace Freelance\Task\Providers;
 
-use App\ValueObjects\Id;
+use Freelance\Task\Domain\ValueObjects\Id;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;

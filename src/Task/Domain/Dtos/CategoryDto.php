@@ -2,7 +2,7 @@
 
 namespace Freelance\Task\Domain\Dtos;
 
-use App\ValueObjects\Id;
+use Freelance\Task\Domain\ValueObjects\Id;
 use Freelance\Task\Domain\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;

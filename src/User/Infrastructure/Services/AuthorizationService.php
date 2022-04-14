@@ -2,7 +2,7 @@
 
 namespace Freelance\User\Infrastructure\Services;
 
-use App\ValueObjects\Id;
+use Freelance\User\Domain\ValueObjects\Id;
 use Freelance\User\Contracts\AuthorizationService as AuthorizationServiceContract;
 use Freelance\User\Domain\Enums\RoleEnum;
 use Freelance\User\Infrastructure\Repositories\UserRepository;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ValueObjects;
+namespace Freelance\User\Domain\ValueObjects;
 
 use InvalidArgumentException;
 
@@ -20,11 +20,6 @@ final class Id
         return new self($id);
     }
 
-    public function value(): string
-    {
-        return $this->id;
-    }
-
     public function equals(self $other): bool
     {
         return $this->id === $other->id;
@@ -33,5 +28,10 @@ final class Id
     public function __toString(): string
     {
         return $this->value();
+    }
+
+    public function value(): string
+    {
+        return $this->id;
     }
 }

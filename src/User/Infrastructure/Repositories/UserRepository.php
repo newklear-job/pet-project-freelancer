@@ -2,7 +2,7 @@
 
 namespace Freelance\User\Infrastructure\Repositories;
 
-use App\ValueObjects\Id;
+use Freelance\User\Domain\ValueObjects\Id;
 use Freelance\User\Domain\Dtos\RegisterDto;
 use Freelance\User\Domain\Models\User;
 use Freelance\User\Domain\ValueObjects\Email;

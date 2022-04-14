@@ -2,7 +2,7 @@
 
 namespace Freelance\Task\Infrastructure\Repositories;
 
-use App\ValueObjects\Id;
+use Freelance\Task\Domain\ValueObjects\Id;
 use Filterable\Dtos\FilterDto;
 use Freelance\Task\Domain\Dtos\CategoryDto;
 use Freelance\Task\Domain\Models\Category;

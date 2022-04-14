@@ -2,7 +2,7 @@
 
 namespace Freelance\Task\Application\Policies;
 
-use App\ValueObjects\Id;
+use Freelance\Task\Domain\ValueObjects\Id;
 use Freelance\User\Contracts\AuthorizationService;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Foundation\Auth\User;
