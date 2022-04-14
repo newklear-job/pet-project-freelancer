@@ -14,6 +14,5 @@ class TestDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersSeeder::class);
-        $this->call(CategoriesSeeder::class);
     }
 }

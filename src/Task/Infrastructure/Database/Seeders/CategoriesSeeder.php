@@ -1,6 +1,6 @@
 <?php
 
-namespace Freelance\User\Infrastructure\Database\Seeders;
+namespace Freelance\Task\Infrastructure\Database\Seeders;
 
 use Freelance\Task\Domain\Models\Category;
 use Illuminate\Database\Seeder;
