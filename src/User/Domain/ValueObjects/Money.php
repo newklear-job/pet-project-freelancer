@@ -25,6 +25,11 @@ final class Money
         return $this->amount;
     }
 
+    public function formatted(): string
+    {
+        return number_format($this->amount / 100, 2);
+    }
+
     public function equals(Money $other): bool
     {
         return $this->amount === $other->amount;

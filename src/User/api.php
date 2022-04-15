@@ -19,4 +19,10 @@ Route::post('/logout', [LoginController::class, 'destroy'])
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [\Freelance\User\Application\Http\Controllers\UserController::class, 'show'])
          ->name('users.show');
+
+    Route::put(
+        '/freelancer/profile',
+        [\Freelance\User\Application\Http\Controllers\FreelancerController::class, 'update']
+    )
+         ->name('freelancer.profile.update');
 });
