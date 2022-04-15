@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::put(
         '/freelancer/profile',
-        [\Freelance\User\Application\Http\Controllers\FreelancerController::class, 'update']
+        [\Freelance\User\Application\Http\Controllers\FreelancerProfileController::class, 'update']
     )
          ->name('freelancer.profile.update');
 });
