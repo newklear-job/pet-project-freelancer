@@ -6,10 +6,14 @@ use Freelance\User\Contracts\AuthorizationService as AuthorizationServiceContrac
 use Freelance\User\Domain\Actions\Contracts\LoginsUserAction;
 use Freelance\User\Domain\Actions\Contracts\LogoutsUserAction;
 use Freelance\User\Domain\Actions\Contracts\RegistersUserAction;
+use Freelance\User\Domain\Actions\Contracts\SetsFreelancerProfileAction;
 use Freelance\User\Domain\Actions\LoginUserAction;
 use Freelance\User\Domain\Actions\LogoutUserAction;
 use Freelance\User\Domain\Actions\RegisterUserAction;
+use Freelance\User\Domain\Actions\SetFreelancerProfileAction;
+use Freelance\User\Infrastructure\Repositories\EloquentFreelancerRepository;
 use Freelance\User\Infrastructure\Repositories\EloquentUserRepository;
+use Freelance\User\Infrastructure\Repositories\FreelancerRepository;
 use Freelance\User\Infrastructure\Repositories\UserRepository;
 use Freelance\User\Infrastructure\Services\AuthorizationService;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
         LogoutsUserAction::class            => LogoutUserAction::class,
         RegistersUserAction::class          => RegisterUserAction::class,
         AuthorizationServiceContract::class => AuthorizationService::class,
+        SetsFreelancerProfileAction::class  => SetFreelancerProfileAction::class,
+        FreelancerRepository::class         => EloquentFreelancerRepository::class,
     ];
 
     /**
