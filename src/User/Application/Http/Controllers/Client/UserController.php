@@ -1,6 +1,6 @@
 <?php
 
-namespace Freelance\User\Application\Http\Controllers;
+namespace Freelance\User\Application\Http\Controllers\Client;
 
 final class UserController
 {

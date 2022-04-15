@@ -1,6 +1,6 @@
 <?php
 
-namespace Freelance\User\Application\Http\Controllers;
+namespace Freelance\User\Application\Http\Controllers\Client;
 
 use Freelance\User\Application\Http\Resources\Client\FreelancerResource;
 use Freelance\User\Domain\Actions\Contracts\SetsFreelancerProfileAction;

@@ -1,10 +1,9 @@
 <?php
 
-namespace Freelance\Task\Application\Http\Controllers;
+namespace Freelance\Task\Application\Http\Controllers\Admin;
 
-use Freelance\Task\Domain\ValueObjects\Id;
 use Filterable\Dtos\FilterDto;
-use Freelance\Task\Application\Http\Resources\CategoryResource;
+use Freelance\Task\Application\Http\Resources\Admin\CategoryResource;
 use Freelance\Task\Domain\Actions\Contracts\CreatesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\DeletesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\GetsPaginatedCategoriesAction;
@@ -12,11 +11,14 @@ use Freelance\Task\Domain\Actions\Contracts\ShowsCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\UpdatesCategoryAction;
 use Freelance\Task\Domain\Dtos\CategoryDto;
 use Freelance\Task\Domain\Models\Category;
+use Freelance\Task\Domain\ValueObjects\Id;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
+
+use function response;
 
 final class CategoryController
 {
