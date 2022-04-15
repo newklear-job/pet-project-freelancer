@@ -15,3 +15,8 @@ it('register store method calls proper action and returns token', function () {
          ->assertJsonStructure(['data' => ['hour_rate', 'user_id']])
          ->assertJsonFragment(['hour_rate' => "100.00"]);
 })->shouldHaveCalledAction(SetsFreelancerProfileAction::class);
+
+it('update freelancer profile is closed to guests.', function () {
+    $this->putJson(route('freelancer.profile.update'))
+         ->assertUnauthorized();
+});
