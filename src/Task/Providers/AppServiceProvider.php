@@ -2,6 +2,7 @@
 
 namespace Freelance\Task\Providers;
 
+use Freelance\Task\Contracts\CategoryService as CategoryServiceContract;
 use Freelance\Task\Domain\Actions\Contracts\CreatesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\DeletesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\GetsPaginatedCategoriesAction;
@@ -14,6 +15,7 @@ use Freelance\Task\Domain\Actions\ShowCategoryAction;
 use Freelance\Task\Domain\Actions\UpdateCategoryAction;
 use Freelance\Task\Infrastructure\Repositories\CategoryRepository;
 use Freelance\Task\Infrastructure\Repositories\EloquentCategoryRepository;
+use Freelance\Task\Infrastructure\Services\CategoryService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
         CreatesCategoryAction::class         => CreateCategoryAction::class,
         ShowsCategoryAction::class           => ShowCategoryAction::class,
         UpdatesCategoryAction::class         => UpdateCategoryAction::class,
-        DeletesCategoryAction::class          => DeleteCategoryAction::class,
+        DeletesCategoryAction::class         => DeleteCategoryAction::class,
+        CategoryServiceContract::class       => CategoryService::class
     ];
 
     /**

@@ -22,6 +22,7 @@ final class FreelancerProfileController
         $dto = FreelancerProfileDto::create(
             auth()->id(),
             $request->input('hour_rate'),
+            $request->input('category_ids', []),
         );
         $profile = $action->run($dto);
         return new FreelancerResource($profile);
