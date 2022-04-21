@@ -10,8 +10,12 @@ abstract class FeatureTestCase extends BaseTestCase
     use CreatesApplication;
     use RefreshDatabase;
 
-    public function shouldHaveCalledAction(string $actionName): void
+    public function shouldHaveCalledAction(string $actionName, ?callable $callable): void
     {
+        if (is_callable($callable))
+        {
+            $callable();
+        }
         $original = $this->app->make($actionName);
 
         $this->mock($actionName)
