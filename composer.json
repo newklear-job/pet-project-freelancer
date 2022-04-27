@@ -6,12 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "newklear-job/filterable": "dev-master",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/fortify": "^1.11",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
+        "newklear-job/filterable": "dev-master",
+        "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
