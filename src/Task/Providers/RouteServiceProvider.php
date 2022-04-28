@@ -32,6 +32,11 @@ class RouteServiceProvider extends ServiceProvider
             return Id::create($value);
         });
 
+        Route::pattern('job', '[0-9]+');
+        Route::bind('job', function ($value) {
+            return Id::create($value);
+        });
+
         $this->routes(function () {
             if (file_exists(__DIR__ . '/../api.php')) {
                 Route::prefix('api')
