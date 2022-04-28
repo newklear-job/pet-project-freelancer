@@ -6,15 +6,19 @@ use Freelance\Task\Contracts\CategoryService as CategoryServiceContract;
 use Freelance\Task\Domain\Actions\Contracts\CreatesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\DeletesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\GetsPaginatedCategoriesAction;
+use Freelance\Task\Domain\Actions\Contracts\Job\CreatesJobAction;
 use Freelance\Task\Domain\Actions\Contracts\ShowsCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\UpdatesCategoryAction;
 use Freelance\Task\Domain\Actions\CreateCategoryAction;
 use Freelance\Task\Domain\Actions\DeleteCategoryAction;
 use Freelance\Task\Domain\Actions\GetPaginatedCategoriesAction;
+use Freelance\Task\Domain\Actions\Job\CreateJobAction;
 use Freelance\Task\Domain\Actions\ShowCategoryAction;
 use Freelance\Task\Domain\Actions\UpdateCategoryAction;
 use Freelance\Task\Infrastructure\Repositories\CategoryRepository;
 use Freelance\Task\Infrastructure\Repositories\EloquentCategoryRepository;
+use Freelance\Task\Infrastructure\Repositories\EloquentJobRepository;
+use Freelance\Task\Infrastructure\Repositories\JobRepository;
 use Freelance\Task\Infrastructure\Services\CategoryService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\ServiceProvider;
@@ -28,7 +32,9 @@ class AppServiceProvider extends ServiceProvider
         ShowsCategoryAction::class           => ShowCategoryAction::class,
         UpdatesCategoryAction::class         => UpdateCategoryAction::class,
         DeletesCategoryAction::class         => DeleteCategoryAction::class,
-        CategoryServiceContract::class       => CategoryService::class
+        CategoryServiceContract::class       => CategoryService::class,
+        JobRepository::class                 => EloquentJobRepository::class,
+        CreatesJobAction::class              => CreateJobAction::class,
     ];
 
     /**
