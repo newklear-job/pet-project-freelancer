@@ -17,9 +17,12 @@ final class CreateJobAction implements CreatesJobAction
 
     public function run(JobDto $dto): Job
     {
-        $job =  $this->repository->create($dto);
+        $job = $this->repository->create($dto);
         $this->repository->syncCategories(Id::create($job->id), $dto->getCategoryIds());
 
+        foreach ($dto->getMedia() as $media) {  //todo: refactor (in update too)
+            $job->addMedia($media)->toMediaCollection();
+        }
         return $job;
     }
 }

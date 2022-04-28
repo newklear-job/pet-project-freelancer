@@ -9,11 +9,12 @@ use Illuminate\Http\UploadedFile;
 uses(\Tests\FeatureTestCase::class);
 
 it('creates job and returns it on action call', function () {
+    Storage::fake();
     $action = app(CreatesJobAction::class);
 
     $category = Category::factory()->create();
 
-    $file = UploadedFile::fake()->create('file');
+    $file = UploadedFile::fake()->create('specification.docx');
     $dto = JobDto::create(
         'name',
         'description',
@@ -26,8 +27,13 @@ it('creates job and returns it on action call', function () {
         ->name->toBe('name')
         ->description->toBe('description');
 
+    $this->assertDatabaseHas(Job::class, ['id' => $job->id]);
+
     expect($job->categories)->toHaveLength(1);
     expect($job->categories->first())->id->toBe($category->id);
 
-    $this->assertDatabaseHas(Job::class, ['id' => $job->id]);
+    expect($job->media)->toHaveLength(1);
+    $uploadedMedia = $job->media->first();
+    expect($uploadedMedia)->file_name->toBe('specification.docx');
+    Storage::disk()->assertExists("$uploadedMedia->id/$uploadedMedia->full_name");
 });
