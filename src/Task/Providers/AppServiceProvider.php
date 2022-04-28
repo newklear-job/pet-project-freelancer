@@ -7,12 +7,20 @@ use Freelance\Task\Domain\Actions\Contracts\CreatesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\DeletesCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\GetsPaginatedCategoriesAction;
 use Freelance\Task\Domain\Actions\Contracts\Job\CreatesJobAction;
+use Freelance\Task\Domain\Actions\Contracts\Job\DeletesJobAction;
+use Freelance\Task\Domain\Actions\Contracts\Job\GetsPaginatedJobsAction;
+use Freelance\Task\Domain\Actions\Contracts\Job\ShowsJobAction;
+use Freelance\Task\Domain\Actions\Contracts\Job\UpdatesJobAction;
 use Freelance\Task\Domain\Actions\Contracts\ShowsCategoryAction;
 use Freelance\Task\Domain\Actions\Contracts\UpdatesCategoryAction;
 use Freelance\Task\Domain\Actions\CreateCategoryAction;
 use Freelance\Task\Domain\Actions\DeleteCategoryAction;
 use Freelance\Task\Domain\Actions\GetPaginatedCategoriesAction;
 use Freelance\Task\Domain\Actions\Job\CreateJobAction;
+use Freelance\Task\Domain\Actions\Job\DeleteJobAction;
+use Freelance\Task\Domain\Actions\Job\GetPaginatedJobsAction;
+use Freelance\Task\Domain\Actions\Job\ShowJobAction;
+use Freelance\Task\Domain\Actions\Job\UpdateJobAction;
 use Freelance\Task\Domain\Actions\ShowCategoryAction;
 use Freelance\Task\Domain\Actions\UpdateCategoryAction;
 use Freelance\Task\Infrastructure\Repositories\CategoryRepository;
@@ -35,6 +43,10 @@ class AppServiceProvider extends ServiceProvider
         CategoryServiceContract::class       => CategoryService::class,
         JobRepository::class                 => EloquentJobRepository::class,
         CreatesJobAction::class              => CreateJobAction::class,
+        DeletesJobAction::class              => DeleteJobAction::class,
+        ShowsJobAction::class                => ShowJobAction::class,
+        UpdatesJobAction::class              => UpdateJobAction::class,
+        GetsPaginatedJobsAction::class       => GetPaginatedJobsAction::class,
     ];
 
     /**

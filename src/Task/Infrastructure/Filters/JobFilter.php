@@ -12,8 +12,13 @@ final class JobFilter extends QueryFilter
         $this->builder->where('name', 'like', "%$name%");
     }
 
-    public function parentId($parentId): void
+    public function description(string $description): void
     {
-        $this->builder->where('parent_id', $parentId);
+        $this->builder->where('description', $description);
+    }
+
+    public function categoryIds(array $categoryIds): void
+    {
+        $this->builder->whereHas('categories', fn($query) => $query->whereIn('categories.id', $categoryIds));
     }
 }

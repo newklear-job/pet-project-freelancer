@@ -28,4 +28,12 @@ class JobFactory extends Factory
         ]
         );
     }
+
+    public function description(string $description)
+    {
+        return $this->state(fn(array $attributes) => [
+            'description' => $description,
+        ]
+        );
+    }
 }
