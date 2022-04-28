@@ -10,7 +10,7 @@ abstract class FeatureTestCase extends BaseTestCase
     use CreatesApplication;
     use RefreshDatabase;
 
-    public function shouldHaveCalledAction(string $actionName, ?callable $callable): void
+    public function shouldHaveCalledAction(string $actionName, ?callable $callable = null): void
     {
         if (is_callable($callable))
         {
