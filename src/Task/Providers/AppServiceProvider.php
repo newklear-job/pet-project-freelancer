@@ -29,6 +29,7 @@ use Freelance\Task\Infrastructure\Repositories\EloquentJobRepository;
 use Freelance\Task\Infrastructure\Repositories\JobRepository;
 use Freelance\Task\Infrastructure\Services\CategoryService;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -89,5 +90,7 @@ class AppServiceProvider extends ServiceProvider
                    '\Domain\Models\\' .
                    explode('Factory', (class_basename($factoryClass)))[0];
         });
+
+        Model::preventLazyLoading(! app()->isProduction());
     }
 }

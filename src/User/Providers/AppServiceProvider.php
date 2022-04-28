@@ -17,6 +17,7 @@ use Freelance\User\Infrastructure\Repositories\FreelancerRepository;
 use Freelance\User\Infrastructure\Repositories\UserRepository;
 use Freelance\User\Infrastructure\Services\AuthorizationService;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -73,5 +74,7 @@ class AppServiceProvider extends ServiceProvider
                    '\Domain\Models\\' .
                    explode('Factory', (class_basename($factoryClass)))[0];
         });
+
+        Model::preventLazyLoading(! app()->isProduction());
     }
 }
