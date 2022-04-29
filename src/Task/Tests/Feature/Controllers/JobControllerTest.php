@@ -5,7 +5,9 @@ use Freelance\Task\Domain\Actions\Contracts\Job\DeletesJobAction;
 use Freelance\Task\Domain\Actions\Contracts\Job\GetsPaginatedJobsAction;
 use Freelance\Task\Domain\Actions\Contracts\Job\ShowsJobAction;
 use Freelance\Task\Domain\Actions\Contracts\Job\UpdatesJobAction;
+use Freelance\Task\Domain\Models\Category;
 use Freelance\Task\Domain\Models\Job;
+use Illuminate\Http\UploadedFile;
 
 uses(\Tests\FeatureTestCase::class);
 
@@ -33,11 +35,16 @@ it('job index returns data and calls action', function () {
 })->shouldHaveCalledAction(GetsPaginatedJobsAction::class);
 
 it('job store returns data and calls proper action', function () {
+    Storage::fake();
     $this->seed();
     login();
+    $category = Category::factory()->create();
+    $file = UploadedFile::fake()->create('image.png');
     $this->postJson(route('jobs.store'), [
         'name'      => 'test name',
         'description' => 'description',
+        'category_ids' => [$category->id],
+        'media' => [$file]
     ])
          ->assertSuccessful()
          ->assertJsonStructure([
@@ -51,7 +58,9 @@ it('job store returns data and calls proper action', function () {
                                        'updated_at',
                                    ]
                                ])
-         ->assertJsonFragment(['name' => 'test name']);
+         ->assertJsonFragment(['name' => 'test name'])
+         ->assertJsonCount(1, 'data.media')
+         ->assertJsonCount(1, 'data.categories');
 })->shouldHaveCalledAction(CreatesJobAction::class);
 
 it('job show returns data and calls proper action', function () {
@@ -75,12 +84,17 @@ it('job show returns data and calls proper action', function () {
 })->shouldHaveCalledAction(ShowsJobAction::class);
 
 it('job update returns data and calls proper action', function () {
+    Storage::fake();
     $this->seed();
     login();
+    $category = Category::factory()->create();
+    $file = UploadedFile::fake()->create('image.png');
     $job = Job::factory()->create();
     $this->patchJson(route('jobs.update', $job->id), [
         'name'      => 'test name',
         'description' => 'description',
+        'category_ids' => [$category->id],
+        'media' => [$file]
     ])
          ->assertSuccessful()
          ->assertJsonStructure([
@@ -94,7 +108,9 @@ it('job update returns data and calls proper action', function () {
                                        'updated_at',
                                    ]
                                ])
-         ->assertJsonFragment(['name' => 'test name']);
+         ->assertJsonFragment(['name' => 'test name'])
+        ->assertJsonCount(1, 'data.media')
+        ->assertJsonCount(1, 'data.categories');
 })->shouldHaveCalledAction(UpdatesJobAction::class);
 
 it('job destroy calls proper action', function () {
