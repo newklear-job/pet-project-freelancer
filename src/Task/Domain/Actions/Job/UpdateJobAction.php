@@ -23,6 +23,8 @@ final class UpdateJobAction implements UpdatesJobAction
         foreach ($dto->getMedia() as $media) {
             $job->addMedia($media)->toMediaCollection();
         }
+
+        $this->repository->loadRelations($job);
         return $job;
     }
 }

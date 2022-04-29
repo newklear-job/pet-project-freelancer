@@ -15,6 +15,7 @@ final class EloquentJobRepository implements JobRepository
     {
         return Job::query()
                   ->filter((new JobFilter())->setFilters($filterDto->getFilters()))
+                  ->with('categories', 'media')
                   ->when(
                       $filterDto->getSort(),
                       fn($query) => $query->orderBy(
@@ -63,5 +64,10 @@ final class EloquentJobRepository implements JobRepository
     {
         $job = $this->getById($jobId);
         $job->categories()->sync(array_map(fn(Id $id) => $id->value(), $categoryIds));
+    }
+
+    public function loadRelations(Job $job): void
+    {
+        $job->load('categories', 'media');
     }
 }

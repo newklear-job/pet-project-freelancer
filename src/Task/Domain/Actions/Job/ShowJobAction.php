@@ -3,8 +3,8 @@
 namespace Freelance\Task\Domain\Actions\Job;
 
 use Freelance\Task\Domain\Actions\Contracts\Job\ShowsJobAction;
-use Freelance\Task\Domain\ValueObjects\Id;
 use Freelance\Task\Domain\Models\Job;
+use Freelance\Task\Domain\ValueObjects\Id;
 use Freelance\Task\Infrastructure\Repositories\JobRepository;
 
 final class ShowJobAction implements ShowsJobAction
@@ -16,6 +16,8 @@ final class ShowJobAction implements ShowsJobAction
 
     public function run(Id $id): Job
     {
-        return $this->repository->getById($id);
+        $job = $this->repository->getById($id);
+        $this->repository->loadRelations($job);
+        return $job;
     }
 }

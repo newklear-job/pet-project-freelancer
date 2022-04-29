@@ -23,6 +23,8 @@ final class CreateJobAction implements CreatesJobAction
         foreach ($dto->getMedia() as $media) {  //todo: refactor (in update too)
             $job->addMedia($media)->toMediaCollection();
         }
+
+        $this->repository->loadRelations($job);
         return $job;
     }
 }

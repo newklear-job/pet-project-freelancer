@@ -31,7 +31,6 @@ final class JobController
         $this->authorize('index', Job::class);
         $filterDto = FilterDto::createFromArrayBag($request->all());
         $paginated = $action->run($filterDto);
-        $paginated->load('categories', 'media');
         return JobResource::collection($paginated);
     }
 
@@ -47,7 +46,6 @@ final class JobController
             $request->file('media', []),
         );
         $entity = $action->run($dto);
-        $entity->load('categories', 'media');
         return new JobResource($entity);
     }
 
@@ -57,7 +55,6 @@ final class JobController
     ): JsonResource {
         $this->authorize('show', [Job::class, $id]);
         $entity = $action->run($id);
-        $entity->load('categories', 'media');
         return new JobResource($entity);
     }
 
@@ -75,7 +72,6 @@ final class JobController
         );
 
         $entity = $action->run($id, $dto);
-        $entity->load('categories', 'media');
         return new JobResource($entity);
     }
 

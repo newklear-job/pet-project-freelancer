@@ -24,4 +24,6 @@ interface JobRepository
      * @param Id[] $categoryIds
      */
     public function syncCategories(Id $jobId, array $categoryIds): void;
+
+    public function loadRelations(Job $job): void;
 }
